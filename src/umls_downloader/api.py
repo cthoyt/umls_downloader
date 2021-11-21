@@ -63,13 +63,25 @@ def download_tgt(url: str, path: Union[str, Path], *, api_key: Optional[str] = N
     )
 
 
-def download_umls(version: Optional[str] = None, *, api_key: Optional[str] = None) -> Path:
-    """Ensure the given version of the UMLS MRCONSO.RRF file."""
+def download_umls(
+    version: Optional[str] = None, *, api_key: Optional[str] = None, force: bool = False
+) -> Path:
+    """Ensure the given version of the UMLS MRCONSO.RRF file.
+
+    :param version: The version of UMLS to ensure. If not given, is looked up
+        with :mod:`bioversions`.
+    :param api_key: An API key. If not given, is looked up using
+        :func:`pystow.get_config` with the ``umls`` module and ``api_key`` key.
+    :param force: Should the file be re-downloaded, even if it already exists?
+    :return: The path of the file for the given version of UMLS.
+    """
     if version is None:
         import bioversions
 
         version = bioversions.get_version("umls")
     url = f"https://download.nlm.nih.gov/umls/kss/{version}/umls-{version}-mrconso.zip"
     path = MODULE.join(version, name=f"umls-{version}-mrconso.zip")
+    if path.is_file() and not force:
+        return path
     download_tgt(url, path, api_key=api_key)
     return path
