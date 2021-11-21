@@ -24,9 +24,6 @@
     <a href="https://github.com/cthoyt/umls_downloader/blob/main/LICENSE">
         <img alt="PyPI - License" src="https://img.shields.io/pypi/l/umls_downloader" />
     </a>
-    <a href='https://umls_downloader.readthedocs.io/en/latest/?badge=latest'>
-        <img src='https://readthedocs.org/projects/umls_downloader/badge/?version=latest' alt='Documentation Status' />
-    </a>
     <a href='https://github.com/psf/black'>
         <img src='https://img.shields.io/badge/code%20style-black-000000.svg' alt='Code style: black' />
     </a>
@@ -96,12 +93,15 @@ from umls_downloader import download_umls
 path = download_umls()
 ```
 
-## 👐 Contributing
+## Why not an API?
 
-Contributions, whether filing an issue, making a pull request, or forking, are
-appreciated. See
-[CONTRIBUTING.rst](https://github.com/cthoyt/umls_downloader/blob/master/CONTRIBUTING.rst)
-for more information on getting involved.
+The UMLS provides an [API](https://documentation.uts.nlm.nih.gov/rest/home.html)
+for access to tiny bits of data at a time. There are even two recent (last 5
+years) packages [`umls-api`](https://pypi.org/project/umls-api/)
+[`connect-umls``](https://pypi.org/project/connect-umls/) that provide a wrapper
+around them. However, API access is generally rate limited, difficult to use in
+bulk, and slow. For working with UMLS (or any other database, for that matter)in
+bulk, it's necessary to download full database dumps.
 
 ## 👋 Attribution
 
