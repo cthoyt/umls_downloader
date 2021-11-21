@@ -31,8 +31,8 @@ def download_tgt(url: str, path: Union[str, Path], *, api_key: Optional[str] = N
     :param url: The URL of the file to download, like
         ``https://download.nlm.nih.gov/umls/kss/2021AB/umls-2021AB-mrconso.zip``
     :param path: The local file path where the file should be downloaded
-    :param api_key: An API key. If not given, looks up using :func:`pystow.get_config`
-        with the ``umls`` module and ``api_key`` key.
+    :param api_key: An API key. If not given, is looked up using
+        :func:`pystow.get_config` with the ``umls`` module and ``api_key`` key.
     """
     if api_key is None:
         api_key = pystow.get_config("umls", "api_key", raise_on_missing=True)
