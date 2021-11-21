@@ -2,4 +2,4 @@
 
 """Automate downloading UMLS data."""
 
-from .api import download_tgt, download_umls  # noqa:F401
+from .api import download_tgt, download_umls, open_umls  # noqa:F401

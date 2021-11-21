@@ -90,6 +90,19 @@ from umls_downloader import download_umls
 path = download_umls()
 ```
 
+## Download and open the file
+
+The UMLS file is zipped, so it's nice to reduce code with the `open_umls()`
+function:
+
+```python
+from umls_downloader import open_umls
+
+with open_umls() as file:
+    for line in file:
+        ...
+```
+
 ## Why not an API?
 
 The UMLS provides an [API](https://documentation.uts.nlm.nih.gov/rest/home.html)

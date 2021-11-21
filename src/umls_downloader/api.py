@@ -3,6 +3,8 @@
 """Download functionality for UMLS."""
 
 import logging
+import zipfile
+from contextlib import contextmanager
 from pathlib import Path
 from typing import Optional, Union
 
@@ -14,6 +16,7 @@ import requests
 __all__ = [
     "download_tgt",
     "download_umls",
+    "open_umls",
 ]
 
 logger = logging.getLogger(__name__)
@@ -85,3 +88,20 @@ def download_umls(
         return path
     download_tgt(url, path, api_key=api_key)
     return path
+
+
+@contextmanager
+def open_umls(version: Optional[str] = None, *, api_key: Optional[str] = None, force: bool = False):
+    """Ensure and open the UMLS MRCONSO.RRF file from the given version.
+
+    :param version: The version of UMLS to ensure. If not given, is looked up
+        with :mod:`bioversions`.
+    :param api_key: An API key. If not given, is looked up using
+        :func:`pystow.get_config` with the ``umls`` module and ``api_key`` key.
+    :param force: Should the file be re-downloaded, even if it already exists?
+    :yields: The file, which is used in the context manager.
+    """
+    path = download_umls(version=version, api_key=api_key, force=force)
+    with zipfile.ZipFile(path) as zip_file:
+        with zip_file.open("MRCONSO.RRF", mode="r") as file:
+            yield file
