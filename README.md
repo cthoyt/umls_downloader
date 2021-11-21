@@ -92,8 +92,21 @@ path = download_umls()
 
 ## Download and open the file
 
-The UMLS file is zipped, so it's nice to reduce code with the `open_umls()`
-function:
+The UMLS file is zipped, so it's usually accompanied with the following
+boilerplate code:
+
+```python
+import zipfile
+from umls_downloader import download_umls
+path = download_umls()
+with zipfile.ZipFile(path) as zip_file:
+    with zip_file.open("MRCONSO.RRF", mode="r") as file:
+        for line in file:
+            ...
+```
+
+This exact code is wrapped with the `open_umls()` using Python's context
+manager so it can more simply be written as:
 
 ```python
 from umls_downloader import open_umls
@@ -102,6 +115,8 @@ with open_umls() as file:
     for line in file:
         ...
 ```
+
+The `version` and `api_key` arguments also apply here.
 
 ## Why not an API?
 
