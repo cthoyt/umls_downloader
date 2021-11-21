@@ -12,9 +12,6 @@
     <a href="https://github.com/cthoyt/umls_downloader/actions?query=workflow%3ATests">
         <img alt="Tests" src="https://github.com/cthoyt/umls_downloader/workflows/Tests/badge.svg" />
     </a>
-    <a href="https://github.com/cthoyt/cookiecutter-python-package">
-        <img alt="Cookiecutter template from @cthoyt" src="https://img.shields.io/badge/Cookiecutter-python--package-yellow" /> 
-    </a>
     <a href="https://pypi.org/project/umls_downloader">
         <img alt="PyPI" src="https://img.shields.io/pypi/v/umls_downloader" />
     </a>
@@ -97,8 +94,8 @@ path = download_umls()
 
 The UMLS provides an [API](https://documentation.uts.nlm.nih.gov/rest/home.html)
 for access to tiny bits of data at a time. There are even two recent (last 5
-years) packages [`umls-api`](https://pypi.org/project/umls-api/)
-[`connect-umls``](https://pypi.org/project/connect-umls/) that provide a wrapper
+years) packages [`umls-api`](https://pypi.org/project/umls-api)
+[`connect-umls`](https://pypi.org/project/connect-umls) that provide a wrapper
 around them. However, API access is generally rate limited, difficult to use in
 bulk, and slow. For working with UMLS (or any other database, for that matter)in
 bulk, it's necessary to download full database dumps.
@@ -109,31 +106,6 @@ bulk, it's necessary to download full database dumps.
 
 The code in this package is licensed under the MIT License.
 
-<!--
-### 📖 Citation
-
-Citation goes here!
--->
-
-<!--
-### 🎁 Support
-
-This project has been supported by the following organizations (in alphabetical order):
-
-- [Harvard Program in Therapeutic Science - Laboratory of Systems Pharmacology](https://hits.harvard.edu/the-program/laboratory-of-systems-pharmacology/)
-
--->
-
-<!--
-### 💰 Funding
-
-This project has been supported by the following grants:
-
-| Funding Body                                             | Program                                                                                                                       | Grant           |
-|----------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|-----------------|
-| DARPA                                                    | [Automating Scientific Knowledge Extraction (ASKE)](https://www.darpa.mil/program/automating-scientific-knowledge-extraction) | HR00111990009   |
--->
-
 ### 🍪 Cookiecutter
 
 This package was created
@@ -142,50 +114,3 @@ with [@audreyfeldroy](https://github.com/audreyfeldroy)'s
 using [@cthoyt](https://github.com/cthoyt)'s
 [cookiecutter-snekpack](https://github.com/cthoyt/cookiecutter-snekpack)
 template.
-
-## 🛠️ For Developers
-
-<details>
-  <summary>See developer instrutions</summary>
-
-
-The final section of the README is for if you want to get involved by making a
-code contribution.
-
-### ❓ Testing
-
-After cloning the repository and installing `tox` with `pip install tox`, the
-unit tests in the `tests/` folder can be run reproducibly with:
-
-```shell
-$ tox
-```
-
-Additionally, these tests are automatically re-run with each commit in
-a [GitHub Action](https://github.com/cthoyt/umls_downloader/actions?query=workflow%3ATests)
-.
-
-### 📦 Making a Release
-
-After installing the package in development mode and installing
-`tox` with `pip install tox`, the commands for making a new release are
-contained within the `finish` environment in `tox.ini`. Run the following from
-the shell:
-
-```shell
-$ tox -e finish
-```
-
-This script does the following:
-
-1. Uses BumpVersion to switch the version number in the `setup.cfg` and
-   `src/umls_downloader/version.py` to not have the `-dev` suffix
-2. Packages the code in both a tar archive and a wheel
-3. Uploads to PyPI using `twine`. Be sure to have a `.pypirc` file configured to
-   avoid the need for manual input at this step
-4. Push to GitHub. You'll need to make a release going with the commit where the
-   version was bumped.
-5. Bump the version to the next patch. If you made big changes and want to bump
-   the version by minor, you can use `tox -e bumpversion minor` after.
-
-</details>
