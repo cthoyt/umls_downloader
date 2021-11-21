@@ -37,8 +37,7 @@ def download_tgt(url: str, path: Union[str, Path], *, api_key: Optional[str] = N
     :param api_key: An API key. If not given, is looked up using
         :func:`pystow.get_config` with the ``umls`` module and ``api_key`` key.
     """
-    if api_key is None:
-        api_key = pystow.get_config("umls", "api_key", raise_on_missing=True)
+    api_key = pystow.get_config("umls", "api_key", passthrough=api_key, raise_on_missing=True)
 
     # Step 1: get a link to the ticket granting system (TGT)
     auth_res = requests.post(TGT_URL, data={"apikey": api_key})
