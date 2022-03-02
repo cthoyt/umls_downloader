@@ -2,7 +2,7 @@
 
 """Automate downloading UMLS data."""
 
-from .api import download_tgt, download_umls, open_umls  # noqa:F401
+from .api import download_tgt, download_umls, download_umls_metathesaurus, open_umls  # noqa:F401
 from .semmeddb import (  # noqa:F401
     download_semmeddb_citations,
     download_semmeddb_concept,

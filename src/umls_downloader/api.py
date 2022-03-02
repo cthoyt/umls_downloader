@@ -12,10 +12,12 @@ import bs4
 import pystow
 import pystow.utils
 import requests
+from pystow.utils import name_from_url
 
 __all__ = [
     "download_tgt",
     "download_umls",
+    "download_umls_metathesaurus",
     "open_umls",
 ]
 
@@ -65,6 +67,20 @@ def download_tgt(url: str, path: Union[str, Path], *, api_key: Optional[str] = N
     )
 
 
+def _download_umls(
+    url: str, version: Optional[str] = None, *, api_key: Optional[str] = None, force: bool = False
+) -> Path:
+    if version is None:
+        import bioversions
+
+        version = bioversions.get_version("umls")
+    path = MODULE.join(version, name=name_from_url(url))
+    if path.is_file() and not force:
+        return path
+    download_tgt(url, path, api_key=api_key)
+    return path
+
+
 def download_umls(
     version: Optional[str] = None, *, api_key: Optional[str] = None, force: bool = False
 ) -> Path:
@@ -77,16 +93,24 @@ def download_umls(
     :param force: Should the file be re-downloaded, even if it already exists?
     :return: The path of the file for the given version of UMLS.
     """
-    if version is None:
-        import bioversions
-
-        version = bioversions.get_version("umls")
     url = f"https://download.nlm.nih.gov/umls/kss/{version}/umls-{version}-mrconso.zip"
-    path = MODULE.join(version, name=f"umls-{version}-mrconso.zip")
-    if path.is_file() and not force:
-        return path
-    download_tgt(url, path, api_key=api_key)
-    return path
+    return _download_umls(url=url, version=version, api_key=api_key, force=force)
+
+
+def download_umls_metathesaurus(
+    version: Optional[str] = None, *, api_key: Optional[str] = None, force: bool = False
+) -> Path:
+    """Ensure the given version of the UMLS metathesaurus zip archive.
+
+    :param version: The version of UMLS to ensure. If not given, is looked up
+        with :mod:`bioversions`.
+    :param api_key: An API key. If not given, is looked up using
+        :func:`pystow.get_config` with the ``umls`` module and ``api_key`` key.
+    :param force: Should the file be re-downloaded, even if it already exists?
+    :return: The path of the file for the given version of UMLS.
+    """
+    url = f"https://download.nlm.nih.gov/umls/kss/{version}/umls-{version}-metathesaurus.zip"
+    return _download_umls(url=url, version=version, api_key=api_key, force=force)
 
 
 @contextmanager
