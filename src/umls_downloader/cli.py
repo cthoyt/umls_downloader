@@ -19,7 +19,7 @@ from typing import Optional
 import click
 from more_click import verbose_option
 
-from .api import download_umls
+from .api import download_tgt, download_umls
 
 __all__ = [
     "main",
@@ -28,12 +28,24 @@ __all__ = [
 logger = logging.getLogger(__name__)
 
 
-@click.group()
+@click.command()
 @verbose_option
-@click.option("--version")
-def main(version: Optional[str]):
-    """Ensure the given version of the UMLS."""
-    download_umls(version=version)
+@click.option("--version", help="Version of UMLS to download if not using --url")
+@click.option(
+    "--url", help="The URL for a file to be downloaded through the UMLS ticket granting system."
+)
+@click.option("--output", help="The local file path to download a file to if using --url")
+@click.option(
+    "--api-key",
+    help="The API key for the UMLS ticket granting system. If not given, uses pystow to load."
+    " Get one at https://uts.nlm.nih.gov/uts/edit-profile. ",
+)
+def main(version: Optional[str], url: Optional[str], output: Optional[str], api_key: Optional[str]):
+    """Download the given version of the UMLS or another UMLS-controlled resource via a custom URL."""
+    if url and output:
+        download_tgt(url=url, path=output, api_key=api_key)
+    else:
+        download_umls(version=version, api_key=api_key)
 
 
 if __name__ == "__main__":
