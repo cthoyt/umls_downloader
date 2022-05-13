@@ -38,7 +38,8 @@ def main(version: Optional[str], url: Optional[str], output: Optional[str]):
     resource via a custom URL."""
     if url and output:
         download_tgt(url=url, path=output)
-    download_umls(version=version)
+    else:
+        download_umls(version=version)
 
 
 if __name__ == "__main__":
