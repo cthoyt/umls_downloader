@@ -26,20 +26,21 @@
     </a>
 </p>
 
-Don't worry about UMLS Terminology Services (UTS) licensing and distribution
-rules - just use
+Don't worry about [UMLS Terminology Services (UTS)](https://uts.nlm.nih.gov/uts/)
+licensing and distribution rules - just use
 `umls_downloader` to write code that knows how to download content and use it
-automatically from the following resources:
+automatically from the following (non-exhaustive) list of resources:
 
 - [UMLS](https://www.nlm.nih.gov/research/umls/licensedcontent/umlsknowledgesources.html)
 - [RxNorm](https://www.nlm.nih.gov/research/umls/rxnorm/docs/rxnormfiles.html)
 - [SemMedDB](https://lhncbc.nlm.nih.gov/ii/tools/SemRep_SemMedDB_SKR/SemMedDB_download.html)
-- potentially more im the future
+- potentially more in the future
 
-or any content that can be downloaded through the UMLS ticket granting service
-based on [these instructions](https://documentation.uts.nlm.nih.gov/automating-downloads.html).
-There's no centralized list of content available through the UTS so suggestions
-for additional resources are welcome through the [issue tracker](https://github.com/cthoyt/umls_downloader/issues).
+or any content that can be downloaded through
+the [UTS ticket granting](https://documentation.uts.nlm.nih.gov/automating-downloads.html)
+system. There's no centralized list of content available through the UTS so
+suggestions for additional resources are welcome through
+the [issue tracker](https://github.com/cthoyt/umls_downloader/issues).
 
 ## Installation
 
@@ -68,8 +69,9 @@ assert expected_path == path.as_posix()
 
 After it's been downloaded once, it's smart and doesn't need to download again.
 It gets stored using [`pystow`](https://github.com/cthoyt/pystow) automatically
-in the `~/.data/umls`
-directory.
+in the `~/.data/bio/umls` directory.
+
+Other functionality is available including `download_rxnorm` and more.
 
 ## Automating Configuration of UTS Credentials
 
