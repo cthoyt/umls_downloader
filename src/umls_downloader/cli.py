@@ -30,10 +30,16 @@ logger = logging.getLogger(__name__)
 
 @click.command()
 @verbose_option
-@click.option("--version")
-@click.option("--url")
-@click.option("--output")
-@click.option("--api-key")
+@click.option("--version", help="Version of UMLS to download if not using --url")
+@click.option(
+    "--url", help="The URL for a file to be downloaded through the UMLS ticket granting system."
+)
+@click.option("--output", help="The local file path to download a file to if using --url")
+@click.option(
+    "--api-key",
+    help="The API key for the UMLS ticket granting system. If not given, uses pystow to load."
+    " Get one at https://uts.nlm.nih.gov/uts/edit-profile. ",
+)
 def main(version: Optional[str], url: Optional[str], output: Optional[str], api_key: Optional[str]):
     """Download the given version of the UMLS or another UMLS-controlled resource via a custom URL."""
     if url and output:
