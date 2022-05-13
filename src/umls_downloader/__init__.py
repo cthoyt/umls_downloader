@@ -1,14 +1,8 @@
 # -*- coding: utf-8 -*-
 
-"""Automate downloading UMLS data."""
+"""Automate downloading content from the UMLS Terminology Services (UTS)."""
 
-from .api import (  # noqa:F401
-    download_tgt,
-    download_tgt_versioned,
-    download_umls,
-    download_umls_metathesaurus,
-    open_umls,
-)
+from .api import download_tgt, download_tgt_versioned  # noqa:F401
 from .rxnorm import download_rxnorm, download_rxnorm_prescribable  # noqa:F401
 from .semmeddb import (  # noqa:F401
     download_semmeddb_citations,
@@ -18,3 +12,4 @@ from .semmeddb import (  # noqa:F401
     download_semmeddb_predication_aux,
     download_semmeddb_sentence,
 )
+from .umls import download_umls, download_umls_metathesaurus, open_umls  # noqa:F401

@@ -1,8 +1,11 @@
+# -*- coding: utf-8 -*-
+
+"""Download RxNorm content through the UMLS Terminology Services."""
+
 from pathlib import Path
 from typing import Optional
 
 import pystow.utils
-from pystow.utils import name_from_url
 
 from .api import download_tgt_versioned
 
@@ -12,6 +15,7 @@ __all__ = [
 ]
 
 MODULE = pystow.module("bio", "rxnorm")
+RXNORM_URL_FMT = "https://download.nlm.nih.gov/umls/kss/rxnorm/RxNorm_full_{version}.zip"
 
 
 def download_rxnorm(
@@ -26,9 +30,8 @@ def download_rxnorm(
     :param force: Should the file be re-downloaded, even if it already exists?
     :return: The path of the file for the given version of RxNorm.
     """
-    url = f"https://download.nlm.nih.gov/umls/kss/rxnorm/RxNorm_full_{version}.zip"
     return download_tgt_versioned(
-        url=url,
+        url_fmt=RXNORM_URL_FMT,
         version=version,
         api_key=api_key,
         force=force,
@@ -44,10 +47,13 @@ def download_rxnorm_prescribable(version: Optional[str] = None, *, force: bool =
         with :mod:`bioversions`.
     :param force: Should the file be re-downloaded, even if it already exists?
     :return: The path of the file for the given version of RxNorm.
+    :raises RuntimeError: if no version is given and none can be looked up
     """
     if version is None:
         import bioversions
 
         version = bioversions.get_version("rxnorm")
+    if version is None:
+        raise RuntimeError("Could not get version for RxNorm")
     url = f"https://download.nlm.nih.gov/rxnorm/RxNorm_full_prescribe_{version}.zip"
-    return MODULE.ensure(version, url=url, name=name_from_url(url), force=force)
+    return MODULE.ensure(version, url=url, force=force)
