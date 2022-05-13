@@ -12,6 +12,9 @@
     <a href="https://github.com/cthoyt/umls_downloader/actions?query=workflow%3ATests">
         <img alt="Tests" src="https://github.com/cthoyt/umls_downloader/workflows/Tests/badge.svg" />
     </a>
+    <a href='https://umls-downloader.readthedocs.io/en/latest/?badge=latest'>
+        <img src='https://readthedocs.org/projects/umls-downloader/badge/?version=latest' alt='Documentation Status' />
+    </a>
     <a href="https://pypi.org/project/umls_downloader">
         <img alt="PyPI" src="https://img.shields.io/pypi/v/umls_downloader" />
     </a>
@@ -71,7 +74,8 @@ After it's been downloaded once, it's smart and doesn't need to download again.
 It gets stored using [`pystow`](https://github.com/cthoyt/pystow) automatically
 in the `~/.data/bio/umls` directory.
 
-Other functionality is available including `download_rxnorm` and more.
+A full list of functions is available in the
+[documentation](https://umls-downloader.readthedocs.io).
 
 ## Automating Configuration of UTS Credentials
 
