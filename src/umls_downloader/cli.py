@@ -33,13 +33,13 @@ logger = logging.getLogger(__name__)
 @click.option("--version")
 @click.option("--url")
 @click.option("--output")
-def main(version: Optional[str], url: Optional[str], output: Optional[str]):
-    """Download the given version of the UMLS or another UMLS-controlled
-    resource via a custom URL."""
+@click.option("--api-key")
+def main(version: Optional[str], url: Optional[str], output: Optional[str], api_key: Optional[str]):
+    """Download the given version of the UMLS or another UMLS-controlled resource via a custom URL."""
     if url and output:
-        download_tgt(url=url, path=output)
+        download_tgt(url=url, path=output, api_key=api_key)
     else:
-        download_umls(version=version)
+        download_umls(version=version, api_key=api_key)
 
 
 if __name__ == "__main__":
