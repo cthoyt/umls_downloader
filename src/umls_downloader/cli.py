@@ -17,9 +17,10 @@ import logging
 from typing import Optional
 
 import click
-from more_click import verbose_option
 
+from more_click import verbose_option
 from .api import download_tgt, download_umls
+from .rxnorm import download_rxnorm
 
 __all__ = [
     "main",
@@ -38,14 +39,18 @@ logger = logging.getLogger(__name__)
 @click.option(
     "--api-key",
     help="The API key for the UMLS ticket granting system. If not given, uses pystow to load."
-    " Get one at https://uts.nlm.nih.gov/uts/edit-profile. ",
+         " Get one at https://uts.nlm.nih.gov/uts/edit-profile. ",
 )
 def main(version: Optional[str], url: Optional[str], output: Optional[str], api_key: Optional[str]):
     """Download the given version of the UMLS or another UMLS-controlled resource via a custom URL."""
     if url and output:
         download_tgt(url=url, path=output, api_key=api_key)
     else:
-        download_umls(version=version, api_key=api_key)
+        umls_path = download_umls(api_key=api_key, force=True)
+        click.secho(f"Downloaded UMLS to {umls_path}")
+
+        rxnorm_path = download_rxnorm(api_key=api_key, force=True)
+        click.secho(f"Downloaded RxNorm to {rxnorm_path}")
 
 
 if __name__ == "__main__":
