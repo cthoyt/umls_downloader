@@ -19,7 +19,7 @@ from typing import Optional
 import click
 from more_click import verbose_option
 
-from .api import download_umls
+from .api import download_tgt, download_umls
 
 __all__ = [
     "main",
@@ -28,11 +28,16 @@ __all__ = [
 logger = logging.getLogger(__name__)
 
 
-@click.group()
+@click.command()
 @verbose_option
 @click.option("--version")
-def main(version: Optional[str]):
-    """Ensure the given version of the UMLS."""
+@click.option("--url")
+@click.option("--output")
+def main(version: Optional[str], url: Optional[str], output: Optional[str]):
+    """Download the given version of the UMLS or another UMLS-controlled
+    resource via a custom URL."""
+    if url and output:
+        download_tgt(url=url, path=output)
     download_umls(version=version)
 
 
