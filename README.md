@@ -26,9 +26,20 @@
     </a>
 </p>
 
-Don't worry about UMLS licensing and distribution rules - just use
-`umls_downloader` to write code that knows how to download it and use it
-automatically.
+Don't worry about UMLS Terminology Services (UTS) licensing and distribution
+rules - just use
+`umls_downloader` to write code that knows how to download content and use it
+automatically from the following resources:
+
+- [UMLS](https://www.nlm.nih.gov/research/umls/licensedcontent/umlsknowledgesources.html)
+- [RxNorm](https://www.nlm.nih.gov/research/umls/rxnorm/docs/rxnormfiles.html)
+- [SemMedDB](https://lhncbc.nlm.nih.gov/ii/tools/SemRep_SemMedDB_SKR/SemMedDB_download.html)
+- potentially more im the future
+
+or any content that can be downloaded through the UMLS ticket granting service
+based on [these instructions](https://documentation.uts.nlm.nih.gov/automating-downloads.html).
+There's no centralized list of content available through the UTS so suggestions
+for additional resources are welcome through the [issue tracker](https://github.com/cthoyt/umls_downloader/issues).
 
 ## Installation
 
@@ -36,7 +47,7 @@ automatically.
 $ pip install umls_downloader
 ```
 
-## Download A Specific Version
+## Download A Specific Version of UMLS
 
 ```python
 import os
@@ -60,7 +71,7 @@ It gets stored using [`pystow`](https://github.com/cthoyt/pystow) automatically
 in the `~/.data/umls`
 directory.
 
-## Automating Configuration of UMLS Credentials
+## Automating Configuration of UTS Credentials
 
 There are two ways to automatically set the username and password so you don't
 have to worry about getting it and passing it around in your python code:
@@ -98,6 +109,7 @@ boilerplate code:
 ```python
 import zipfile
 from umls_downloader import download_umls
+
 path = download_umls()
 with zipfile.ZipFile(path) as zip_file:
     with zip_file.open("MRCONSO.RRF", mode="r") as file:
@@ -105,8 +117,8 @@ with zipfile.ZipFile(path) as zip_file:
             ...
 ```
 
-This exact code is wrapped with the `open_umls()` using Python's context
-manager so it can more simply be written as:
+This exact code is wrapped with the `open_umls()` using Python's context manager
+so it can more simply be written as:
 
 ```python
 from umls_downloader import open_umls
