@@ -4,7 +4,7 @@
 
 import logging
 from pathlib import Path
-from typing import Optional, Union
+from typing import Callable, Optional, Union
 
 import bs4
 import pystow
@@ -78,6 +78,7 @@ def download_tgt_versioned(
     version_key: str,
     api_key: Optional[str] = None,
     force: bool = False,
+    version_transform: Optional[Callable[[str], str]] = None,
 ) -> Path:
     """Download a file via the UMLS ticket granting system.
 
@@ -91,6 +92,8 @@ def download_tgt_versioned(
     :param api_key: An API key. If not given, is looked up using
         :func:`pystow.get_config` with the ``umls`` module and ``api_key`` key.
     :param force: Should the file be re-downloaded?
+    :param version_transform: A string transformation function, in case the version
+        needs to be reformatted
     :returns: The local path to the downloaded versioned file
     :raises ValueError: if the URL format string doesn't have a ``{version}`` substring
     :raises RuntimeError: if no version is given and none can be looked up
@@ -103,6 +106,8 @@ def download_tgt_versioned(
         version = bioversions.get_version(version_key)
     if version is None:
         raise RuntimeError(f"Could not get version for {version_key}")
+    if version_transform:
+        version = version_transform(version)
     url = url_fmt.format(version=version)
     path = pystow.join("bio", module_key, version, name=name_from_url(url))
     download_tgt(url, path, api_key=api_key, force=force)

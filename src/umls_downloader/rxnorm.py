@@ -18,6 +18,13 @@ MODULE = pystow.module("bio", "rxnorm")
 RXNORM_URL_FMT = "https://download.nlm.nih.gov/umls/kss/rxnorm/RxNorm_full_{version}.zip"
 
 
+def _fix_rxnorm_version(rxnorm_version: str) -> str:
+    if "-" not in rxnorm_version:
+        return rxnorm_version
+    year, month, day = rxnorm_version.split("-")
+    return f"{month}{day}{year}"
+
+
 def download_rxnorm(
     version: Optional[str] = None, *, api_key: Optional[str] = None, force: bool = False
 ) -> Path:
@@ -37,6 +44,7 @@ def download_rxnorm(
         force=force,
         version_key="rxnorm",
         module_key="rxnorm",
+        version_transform=_fix_rxnorm_version,
     )
 
 
@@ -55,5 +63,6 @@ def download_rxnorm_prescribable(version: Optional[str] = None, *, force: bool =
         version = bioversions.get_version("rxnorm")
     if version is None:
         raise RuntimeError("Could not get version for RxNorm")
+    version = _fix_rxnorm_version(version)
     url = f"https://download.nlm.nih.gov/rxnorm/RxNorm_full_prescribe_{version}.zip"
     return MODULE.ensure(version, url=url, force=force)
