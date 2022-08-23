@@ -37,6 +37,7 @@ automatically from the following (non-exhaustive) list of resources:
 - [UMLS](https://www.nlm.nih.gov/research/umls/licensedcontent/umlsknowledgesources.html)
 - [RxNorm](https://www.nlm.nih.gov/research/umls/rxnorm/docs/rxnormfiles.html)
 - [SemMedDB](https://lhncbc.nlm.nih.gov/ii/tools/SemRep_SemMedDB_SKR/SemMedDB_download.html)
+- [SNOMED-CT](https://www.nlm.nih.gov/healthit/snomedct/international.html)
 - potentially more in the future
 
 or any content that can be downloaded through
@@ -44,6 +45,8 @@ the [UTS ticket granting](https://documentation.uts.nlm.nih.gov/automating-downl
 system. There's no centralized list of content available through the UTS so
 suggestions for additional resources are welcome through
 the [issue tracker](https://github.com/cthoyt/umls_downloader/issues).
+
+Full documentation are available at [umls-downloader.readthedocs.io](https://umls-downloader.readthedocs.io).
 
 ## Installation
 
