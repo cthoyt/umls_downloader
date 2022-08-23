@@ -12,4 +12,5 @@ from .semmeddb import (  # noqa:F401
     download_semmeddb_predication_aux,
     download_semmeddb_sentence,
 )
+from .snomed import download_snomed_international, download_snomed_us  # noqa:F401
 from .umls import download_umls, download_umls_metathesaurus, open_umls  # noqa:F401

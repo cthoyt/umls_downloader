@@ -7,6 +7,7 @@ from typing import Optional
 
 import pystow
 from pystow.utils import name_from_url
+
 from umls_downloader import download_tgt
 
 __all__ = [
