@@ -15,6 +15,8 @@ __all__ = [
     "download_snomed_us",
 ]
 
+# TODO add versioning
+
 MODULE = pystow.module("bio", "snomed")
 SNOMED_CT_US = (
     "https://download.nlm.nih.gov/mlb/utsauth/USExt/"
