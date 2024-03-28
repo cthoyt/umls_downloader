@@ -13,4 +13,12 @@ from .semmeddb import (  # noqa:F401
     download_semmeddb_sentence,
 )
 from .snomed import download_snomed_international, download_snomed_us  # noqa:F401
-from .umls import download_umls, download_umls_metathesaurus, open_umls  # noqa:F401
+from .umls import (  # noqa:F401
+    download_umls,
+    download_umls_full,
+    download_umls_metathesaurus,
+    open_umls,
+    open_umls_full,
+    open_umls_hierarchy,
+    open_umls_semantic_types,
+)
