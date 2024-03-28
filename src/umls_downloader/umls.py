@@ -147,7 +147,6 @@ def open_umls_semantic_types(
 ):
     """Ensure and open a UMLS file from the given version.
 
-    :param name: The name of the file, like ``MRSTY.RRF``
     :param version: The version of UMLS to ensure. If not given, is looked up
         with :mod:`bioversions`.
     :param api_key: An API key. If not given, is looked up using
@@ -188,17 +187,17 @@ def open_umls_hierarchy(
 
     This file contains the following columns:
 
-    ===   ========================================================================
+    ===   ==========================================================================
     CUI   Unique identifier of concept
     AUI   Unique identifier of atom - variable length field, 8 or 9 characters
     CXN   Context number (e.g., 1, 2, 3)
     PAUI  Unique identifier of atom's immediate parent within this context
-    SAB   Abbreviated source name (SAB) of the source of atom (and therefore of hierarchical context).
+    SAB   Abbreviated source name (SAB) of the source of atom
     RELA  Relationship of atom to its immediate parent
-    PTR   Path to the top or root of the hierarchical context from this atom, represented as a list of AUIs, separated by periods (.) The first one in the list is top of the hierarchy; the last one in the list is the immediate parent of the atom, which also appears as the value of PAUI.
-    HCD   Source asserted hierarchical number or code for this atom in this context; this field is only populated when it is different from the code (unique identifier or code for the string in that source).
-    CVF   Content View Flag. Bit field used to flag rows included in Content View. This field is a varchar field to maximize the number of bits available for use.
-    ===   ========================================================================
+    PTR   Path to the top or root of the hierarchical context from this atom.
+    HCD   Source asserted hierarchical number or code for this atom in this context.
+    CVF   Content View Flag. Bit field used to flag rows included in Content View.
+    ===   ==========================================================================
 
     .. seealso:: https://www.ncbi.nlm.nih.gov/books/NBK9685/table/ch03.T.computable_hierarchies_file_mrhie
     """
