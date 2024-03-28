@@ -156,14 +156,14 @@ def open_umls_semantic_types(
 
     This file contains the following columns:
 
-    ===   ========================================================================
+    ====  ========================================================================
     CUI   Unique identifier of concept
     TUI   Unique identifier of Semantic Type
     STN   Semantic Type tree number
     STY   Semantic Type. The valid values are defined in the Semantic Network.
     ATUI  Unique identifier for attribute
     CVF   Content View Flag. Bit field used to flag rows included in Content View.
-    ===   ========================================================================
+    ====  ========================================================================
 
     .. seealso:: https://www.ncbi.nlm.nih.gov/books/NBK9685/table/ch03.Tf/
     """
@@ -186,7 +186,7 @@ def open_umls_hierarchy(
 
     This file contains the following columns:
 
-    ===   ==========================================================================
+    ====  ==========================================================================
     CUI   Unique identifier of concept
     AUI   Unique identifier of atom - variable length field, 8 or 9 characters
     CXN   Context number (e.g., 1, 2, 3)
@@ -196,7 +196,7 @@ def open_umls_hierarchy(
     PTR   Path to the top or root of the hierarchical context from this atom.
     HCD   Source asserted hierarchical number or code for this atom in this context.
     CVF   Content View Flag. Bit field used to flag rows included in Content View.
-    ===   ==========================================================================
+    ====  ==========================================================================
 
     .. seealso:: https://www.ncbi.nlm.nih.gov/books/NBK9685/table/ch03.T.computable_hierarchies_file_mrhie
     """
