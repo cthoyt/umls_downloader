@@ -177,7 +177,6 @@ def open_umls_hierarchy(
 ):
     """Ensure and open a UMLS file from the given version.
 
-    :param name: The name of the file, like ``MRSTY.RRF``
     :param version: The version of UMLS to ensure. If not given, is looked up
         with :mod:`bioversions`.
     :param api_key: An API key. If not given, is looked up using
